@@ -4,11 +4,12 @@
     <div class="progress-bar">
       <div class="progress" :style="{ width: progress + '%' }"></div>
     </div>
-     <img src="../components/img/download.jpg" alt="img-home" class="img-home" :class="{ zoomedOut: finished }" />
+     <img src="https://i.postimg.cc/7YpL1JXh/download.jpg" alt="img-home" class="img-home" :class="{ zoomedOut: finished }" />
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'LoadingScreen',
   data() {

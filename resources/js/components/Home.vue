@@ -1,7 +1,7 @@
 <template>
   <div class="image-container">
     <div id="text-anim-homepage">Eric Casellas</div>
-    <img src="../components/img/download.jpg" alt="img-home" class="img-home" :class="{ zoomedOut: finished }" />
+    <img src="https://i.postimg.cc/7YpL1JXh/download.jpg" alt="img-home" class="img-home" :class="{ zoomedOut: finished }" />
   </div>
   <HomeMiddle />
   <HomepP2 />
