@@ -21,7 +21,7 @@
    </div>
   <div class="image-container">
     <span class="hover-text">Marcos Alcaraz</span>
-    <img src="../components/img/contactus.jpg" alt="Contact Image" class="img-contact" />
+    <img src="https://i.postimg.cc/JnSGp5Dp/contactus.jpg" alt="Contact Image" class="img-contact" />
   </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
         setTimeout(() => {
           this.success = null;
         }, 5000);
-       
+
         this.resetForm();
       } catch (err) {
         if (err.response && err.response.data) {
@@ -107,7 +107,7 @@ export default {
   padding: 20px;
   background-color: #f0f0f0;
   height: 100vh;
-  
+
 }
 .form-contact {
      font-family: 'Urbanist', sans-serif;
@@ -120,7 +120,7 @@ export default {
   justify-content: center;
   background-color: #f9f9f9;
   border: 8px solid black;
-  padding: 20px 20px 0 20px; 
+  padding: 20px 20px 0 20px;
 
 }
 .form-contact h1 {
@@ -134,12 +134,12 @@ export default {
 .form-contact .form-group {
   display: flex;
   flex-direction: column;
-  
+
 }
 .form-contact label {
   margin-bottom: 5px;
   font-weight: bold;
-  
+
 }
 .form-contact input,
 .form-contact textarea {

@@ -35,7 +35,7 @@ class UserController extends Controller
         $user = new User();
         $user->username = $validated['username'];
         $user->password = Hash::make($validated['password']);
-        $user->rol_id = 1; // o el rol que necesites
+        $user->rol_id = 1;
 
         $user->save();
 
@@ -55,7 +55,6 @@ class UserController extends Controller
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
 
-        // Si usas Sanctum:
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([

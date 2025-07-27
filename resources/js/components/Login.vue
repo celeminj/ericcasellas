@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import api from '../bootstrap.js'; // asegúrate de que este archivo tenga axios configurado
+import api from '../bootstrap.js';
 
 export default {
   name: 'Login',
@@ -41,7 +41,7 @@ export default {
       this.error = '';
       this.success = '';
       try {
-        const response = await api.post('/auth/login', this.user);
+        const response = await api.post('/register', this.user);
 
           localStorage.setItem('auth_token', response.data.token);
           localStorage.setItem('auth_user', JSON.stringify(response.data.user));

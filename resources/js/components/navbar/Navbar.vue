@@ -7,22 +7,22 @@
       <router-link to="/home" class="nav-link">Home</router-link>
       <router-link to="/works" class="nav-link">Works</router-link>
       <div v-if="user">
-         <router-link to="/works" class="nav-link">Add Works</router-link> 
+         <router-link to="/addworks" class="nav-link">Add Works</router-link>
       </div>
       <router-link to="/about" class="nav-link">About</router-link>
     </div>
     <div class="right">
       <div v-if="user" class="contact-name">
         Hola, {{ user.username }}
-        <button @click="logout" class="logout"><svg xmlns="http://www.w3.org/2000/svg" 
-     class="icon icon-logout" 
-     viewBox="0 0 24 24" 
-     fill="none" 
-     stroke="currentColor" 
-     stroke-width="2" 
-     stroke-linecap="round" 
-     stroke-linejoin="round" 
-     width="14" 
+        <button @click="logout" class="logout"><svg xmlns="http://www.w3.org/2000/svg"
+     class="icon icon-logout"
+     viewBox="0 0 24 24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     width="14"
      height="14">
   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
   <polyline points="16 17 21 12 16 7"/>
@@ -66,7 +66,7 @@ export default {
         this.$router.push('/home');
       }
     }
-    
+
 }
 </script>
 
@@ -103,7 +103,7 @@ export default {
 
 .right {
   display: flex;
-  
+
 }
 .contact-name{
   color: rgba(0, 0, 0, 0.577);
