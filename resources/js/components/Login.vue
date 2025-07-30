@@ -11,6 +11,10 @@
         <label for="email">Password:</label>
         <input type="password" v-model="user.password" name="password" required />
       </div>
+        <div class="checkbox-container">
+            <input type="checkbox" id="remember"  v-model="user.remember"  />
+            <label for="remember">Remember me</label>
+        </div>
       <button type="submit" :disabled="sending">Iniciar sesión</button>
     </form>
     <div v-if="error" class="error-message">{{ error }}</div>
@@ -28,20 +32,31 @@ export default {
     return {
       user: {
         username: '',
-        password: ''
+        password: '',
+        remember: false
       },
       sending: false,
       error: '',
       success: ''
     };
   },
+ mounted() {
+  const rememberedUsername = localStorage.getItem('remembered_username');
+  const rememberedPassword = localStorage.getItem('remembered_password');
+  if (rememberedUsername && rememberedPassword) {
+    this.user.username = rememberedUsername;
+    this.user.password = rememberedPassword;
+    this.user.remember = true;
+  }
+}
+,
   methods: {
     async loginUser() {
       this.sending = true;
       this.error = '';
       this.success = '';
       try {
-        const response = await api.post('/register', this.user);
+        const response = await api.post('/auth/login', this.user);
 
           localStorage.setItem('auth_token', response.data.token);
           localStorage.setItem('auth_user', JSON.stringify(response.data.user));
@@ -50,13 +65,21 @@ export default {
 
       console.log("Token: " + response.data.token)
       console.log(response.data);
+                if (this.user.remember) {
+                localStorage.setItem('remembered_username', this.user.username);
+                localStorage.setItem('remembered_password', this.user.password);
+            } else {
+                localStorage.removeItem('remembered_username');
+                localStorage.removeItem('remembered_password');
+            }
+            window.dispatchEvent(new Event('login'));
 
-          this.$router.push('/works')
+          this.$router.push('/addworks')
       } catch (error) {
         if (error.response && error.response.data && error.response.data.message) {
           this.error = error.response.data.message;
         } else {
-          this.error = 'Error al registrar el usuario';
+          this.error = 'Error al Iniciar sesion, por favor intente de nuevo.';
         }
       } finally {
         this.sending = false;
@@ -69,6 +92,26 @@ export default {
 
 
 <style scoped>
+.checkbox-container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: "Urbanist", sans-serif;
+}
+.checkbox-container label {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+}
+.checkbox-container input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #007bff; /* Cambia el color del checkbox */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
 .outer-container {
   display: flex;
   align-items: center;

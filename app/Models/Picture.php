@@ -16,6 +16,7 @@ class Picture extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'title',
         'ruta_picture',
         'description_picture',
         'date_creation',

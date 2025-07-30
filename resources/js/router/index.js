@@ -4,9 +4,10 @@ import Home from '../components/Home.vue'
 import Contatcs from '../components/Contact.vue'
 import Login from '../components/Login.vue'
 import Works from '../components/works/Works.vue'
-import Worksonpicture from '../components/works/Worksonpicture.vue'
+import Pictures from '../components/works/Pictures.vue'
 import About from '../components/about-us/About.vue'
 import AddWorks from '../components/AddWorks.vue'
+import AddPictures from '../components/AddPictures.vue'
 const routes = [
   {
     path: '/',
@@ -38,9 +39,9 @@ const routes = [
     },
 
     {
-        path: '/worksonpicture',
-        name: 'Worksonpicture',
-        component: Worksonpicture
+        path: '/pictures/:id',
+        name: 'pictures',
+        component: Pictures
     },
     {
         path: '/about',
@@ -51,6 +52,12 @@ const routes = [
         path: '/addworks',
         name: 'AddWorks',
         component: AddWorks,
+          meta: { requiresAuth: true }
+    },
+    {
+        path: '/addpictures',
+        name: 'AddPictures',
+        component: AddPictures,
           meta: { requiresAuth: true }
     }
 ]

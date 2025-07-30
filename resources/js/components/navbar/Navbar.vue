@@ -1,74 +1,86 @@
 <template>
   <nav class="navbar-container">
     <div class="left">
-        <router-link to="/home" class="name-casellas"><h1><strong>CASELLAS</strong></h1></router-link>
+      <router-link to="/home" class="name-casellas"><h1><strong>CASELLAS</strong></h1></router-link>
     </div>
     <div class="center">
       <router-link to="/home" class="nav-link">Home</router-link>
       <router-link to="/works" class="nav-link">Works</router-link>
       <div v-if="user">
-         <router-link to="/addworks" class="nav-link">Add Works</router-link>
+        <router-link to="/addworks" class="nav-link">Add Works</router-link>
+        <router-link to="/addpictures" class="nav-link">Add Pictures</router-link>
       </div>
       <router-link to="/about" class="nav-link">About</router-link>
     </div>
     <div class="right">
       <div v-if="user" class="contact-name">
         Hola, {{ user.username }}
-        <button @click="logout" class="logout"><svg xmlns="http://www.w3.org/2000/svg"
-     class="icon icon-logout"
-     viewBox="0 0 24 24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="2"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     width="14"
-     height="14">
-  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-  <polyline points="16 17 21 12 16 7"/>
-  <line x1="21" y1="12" x2="9" y2="12"/>
-</svg>
-</button>
+        <button @click="logout" class="logout">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="icon icon-logout"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               width="14"
+               height="14">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
       </div>
-      <router-link to="contact" class="contact-name" >Contact</router-link>
+      <router-link to="contact" class="contact-name">Contact</router-link>
     </div>
   </nav>
 </template>
 
 <script>
 import { gsap } from 'gsap';
+
 export default {
   name: 'NavbarPage',
-  data(){
+  data() {
     return {
       user: null
     };
   },
-    created() {
-        const tl = gsap.timeline();
-        tl.fromTo(
-        '.navbar-container',
-        { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 2, ease: 'power3.out' , smoothOrigin: true }
-        );
+  created() {
+    this.checkUser();
+    window.addEventListener('login', this.checkUser);
 
-          const userData = localStorage.getItem('auth_user');
-          const token = localStorage.getItem('auth_token');
-          if (userData && token) {
-            this.user = JSON.parse(userData);
-          }
-    },
-    methods: {
-      logout() {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_user');
+    const tl = gsap.timeline();
+    tl.fromTo(
+      '.navbar-container',
+      { opacity: 0, y: -50 },
+      { opacity: 1, y: 0, duration: 2, ease: 'power3.out', smoothOrigin: true }
+    );
+  },
+  beforeUnmount() {
+    window.removeEventListener('login', this.checkUser);
+  },
+  methods: {
+    checkUser() {
+      const userData = localStorage.getItem('auth_user');
+      const token = localStorage.getItem('auth_token');
+      if (userData && token) {
+        this.user = JSON.parse(userData);
+      } else {
         this.user = null;
-        this.$router.push('/home');
       }
+    },
+    logout() {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+      this.user = null;
+      this.$router.push('/home');
     }
-
-}
+  }
+};
 </script>
+
 
 <style scoped>
 .logout{
