@@ -48,8 +48,8 @@ jobs:
           server: ftpupload.net
           username: b12_37391677
           password: ${{ secrets.ftp_password }}
-          local-dir: ./  # Sube todo el proyecto
-          server-dir: ./htdocs/  # Ajusta según tu hosting
+          local-dir: public/build/  # Sube todo el proyecto
+          server-dir: /ericcasellas.celemin.me/htdocs/public/build # Ajusta según tu hosting
           exclude: |
             .env
             .git/
