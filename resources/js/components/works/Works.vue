@@ -1,8 +1,16 @@
 <template>
-  <div class="container-pictures" v-for="album in albumes" :key="album.id_album" v-if="albumes.length > 0">
-  <router-link :to="`/pictures/${album.id_album}`" class="picture-wrapper">
-      <img :src="getImageUrl(album.image_rute)" :alt="album.title" />
-      <div class="overlay-text">
+  <div v-if="albumes.length > 0">
+    <div
+      class="album-block"
+      v-for="(album, index) in albumes"
+      :key="album.id_album"
+      :class="{ 'reverse': index % 2 !== 0 }"
+    >
+      <router-link :to="`/pictures/${album.id_album}`" class="image-block">
+        <img :src="getImageUrl(album.image_rute)" :alt="album.title" />
+      </router-link>
+
+      <div class="text-block">
         <h2>{{ album.title }}</h2>
         <div class="description-pic">
           <p>Fecha: {{ formatDate(album.date_creation) }}</p>
@@ -10,15 +18,15 @@
           <p>Subido por {{ album.user?.username || 'Eric Casellas' }}</p>
         </div>
       </div>
-    </router-link>
-  </div>
-    <div v-else class="container-pictures">
-        <div class="download-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Cargando álbumes..." />
-        <h1>Cargando álbumes disponibles...</h1>
-        </div>
     </div>
+  </div>
+
+  <div v-else class="download-wrapper">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Cargando álbumes..." />
+    <h1>Cargando álbumes disponibles...</h1>
+  </div>
 </template>
+
 
 <script>
 import api from '../../bootstrap'
@@ -58,75 +66,98 @@ export default {
 </script>
 
 <style scoped>
-.container-pictures {
-  width: 100%;
-    display: flex;
-    height: 100%;
-  max-width: 1500px;
-  margin: auto;
-  padding-bottom: 2rem;
-  margin-top: 7%;
+.album-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 4rem 1rem;
+  max-width: 2000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+    font-family: 'Urbanist', sans-serif;
+    text-align: center;
 }
 
-.picture-wrapper {
-  position: relative;
-  display: block;
-  width: 100%;
+.album-block.reverse {
+  flex-direction: row-reverse;
+  text-align: center;
+}
+
+.image-block {
+  flex: 1 1 50%;
   overflow: hidden;
-  border-radius: 20px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.picture-wrapper img {
+.image-block img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
   object-fit: cover;
-  border-radius: 20px;
+  display: block;
 }
-
-.overlay-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  background: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
-  width: 100%;
+.image-block img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+.image-block img:active {
+  transform: scale(0.95);
+}
+.image-block img:focus {
+  outline: none;
+}
+.text-block {
+  flex: 1 1 40%;
   padding: 1rem;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  font-family: 'Urbanist', sans-serif;
+    color: #333;
+    cursor: pointer;
+  transition: all 0.5s ease;
 }
 
-.overlay-text h2 {
-  margin: 0;
-  font-size: 1.5rem;
+.text-block h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.text-block:hover {
+  color: #000;
+  font-family: 'Playfair Display', serif;
 }
 
 .description-pic {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.download-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 4rem;
+}
+
+.download-wrapper h1 {
+  font-size: 2rem;
+  color: #333;
+  font-family: 'Urbanist', sans-serif;
+  margin-top: 1rem;
 }
 
 a {
   text-decoration: none;
   color: inherit;
 }
-.download-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    text-align: center;
 
-    }
-.download-wrapper h1 {
-    font-size: 2rem;
-    color: #333;
-  font-family: 'Urbanist', sans-serif;
-    margin-top: 1rem;
-}
+
 </style>

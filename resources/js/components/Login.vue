@@ -1,7 +1,8 @@
 <template>
   <div class="outer-container">
+    <img src="https://cdn.myportfolio.com/d7391835-998f-4801-bb61-953922c62c51/f1d69765-a8b5-4bac-a890-d031c7bcca10_rwc_695x0x4500x3375x4500.jpg?h=a5a9de5b0c3f336b37de8b5c40b3168c" alt="" class="background-images" />
   <div class="form-container">
-    <h2>Login</h2>
+    <h2>LOGIN</h2>
     <form @submit.prevent="loginUser">
       <div class="name-container">
         <label for="name">Username:</label>
@@ -15,7 +16,7 @@
             <input type="checkbox" id="remember"  v-model="user.remember"  />
             <label for="remember">Remember me</label>
         </div>
-      <button type="submit" :disabled="sending">Iniciar sesión</button>
+      <button type="submit" :disabled="sending" class="animated-brack">Iniciar sesión</button>
     </form>
     <div v-if="error" class="error-message">{{ error }}</div>
     <div v-if="success" class="success-message">{{ success }}</div>
@@ -92,6 +93,15 @@ export default {
 
 
 <style scoped>
+.background-images{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 .checkbox-container{
     display: flex;
     align-items: center;
@@ -107,9 +117,8 @@ export default {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: #007bff; /* Cambia el color del checkbox */
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    accent-color: #000000; /* Cambia el color del checkbox */
+    border: 2px solid #000000;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .outer-container {
@@ -117,7 +126,6 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f0f4f8; /* opcional para contraste */
 }
 
 .form-container {
@@ -125,8 +133,8 @@ export default {
   padding: 2rem;
   text-align: center;
   font-family: "Urbanist", sans-serif;
-  background-color: aliceblue;
-  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  border: 6px solid black;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -138,23 +146,35 @@ export default {
 input {
   width: 100%;
   padding: 8px;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 2px solid black;
 }
 
 button {
+    margin-top: 20px;
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
+  background-color: #000000;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
-}
+  transition: background-color 0.3s ease;
 
-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
+}
+.animated-brack {
+  position: relative;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  border: 8px solid black;
+  border-top: none;
+  border-radius: 0;
+  cursor: pointer;
+  transform: translateY(-25px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  font-family: 'Urbanist', sans-serif;
 }
 
 .error-message {

@@ -33,7 +33,7 @@ export default {
         clearInterval(this.intervalId)
         this.finished = true
       }
-    }, 20)
+    }, 15)
   }
 }
 </script>
@@ -87,7 +87,7 @@ export default {
   width: 100%;
   height: auto;
   object-fit: cover;
-  
+
   transform-origin: center;
   position: absolute;
   top: 50%;

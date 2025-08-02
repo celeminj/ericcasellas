@@ -32,7 +32,7 @@
           </svg>
         </button>
       </div>
-      <router-link to="contact" class="contact-name">Contact</router-link>
+      <router-link to="/contact" class="contact-name">Contact</router-link>
     </div>
   </nav>
 </template>
