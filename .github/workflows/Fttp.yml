@@ -49,7 +49,7 @@ jobs:
           username: b12_37391677
           password: ${{ secrets.ftp_password }}
           local-dir: ./  # Sube todo el proyecto
-          server-dir: ./htdocs  # Ajusta según tu hosting
+          server-dir: ./htdocs/  # Ajusta según tu hosting
           exclude: |
             .env
             .git/
