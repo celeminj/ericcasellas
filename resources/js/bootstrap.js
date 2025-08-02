@@ -7,7 +7,7 @@
 import axios from 'axios';
 window.axios = axios;
 export default axios.create({
-  baseURL: 'http://ericcasellas.celemin.me/public/api',
+  baseURL: 'https://ericcasellas.celemin.me/api',
 })
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
